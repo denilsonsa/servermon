@@ -14,6 +14,7 @@ define("INDIVIDUAL_LOG_DIR","./log");
 
 // Files below will be created inside LOGDIR/SERVERID/
 define("INDIVIDUAL_LOG_FILE","full_log");
+define("INDIVIDUAL_SHORT_LOG_FILE","short_log");
 define("LAST_INDIVIDUAL_LOG_FILE","last_log");
 define("LAST_SUCCESS_DATE_FILE","last_success");
 define("FAIL_COUNT_FILE","fail_count");
@@ -137,13 +138,14 @@ function format_date($timestamp=0)
  *
  * Each field can be accessed by $ret['serverid']['fieldname'].
  *
+ * @param string $filename File to be read.
+ *
  * @return array Associative array containing all servers.
  */
-function read_server_list()  // {{{
+function read_server_list($filename=SERVER_LIST_FILE)  // {{{
 {
 	global $valid_types, $LAST_ERROR;
 
-	$filename=SERVER_LIST_FILE;
 	if( ! is_file($filename) || ! is_readable($filename) )
 	{
 		$LAST_ERROR="read_server_list(): File not found or not readable";
@@ -213,34 +215,64 @@ function read_server_status($serverid)  // {{{
 
 
 /**
- * Reads the global last log file.
+ * Reads a short_log-like file as an array.
  *
- * @return array Associative array.
+ * @param string $filename File to be read.
+ *
+ * @param boolean $associative If true, the returned array will be
+ * associative, with server ID as key. If false, each log line will
+ * be an array element (with numeric keys).
+ *
+ * @return array The log, as an array
  */
-function read_global_last_log()  // {{{
+function read_short_log($filename,$associative=true)  // {{{
 {
 	global $LAST_ERROR;
 
-	$s=file(LAST_GLOBAL_LOG_FILE);
+	if( !is_file($filename) || !is_readable($filename) )
+	{
+		$LAST_ERROR="read_global_last_log(): Could not read short_log file";
+		return NULL;
+	}
+	$s=file($filename);
 	if( !$s )
 	{
-		$LAST_ERROR="read_global_last_log(): Could not read global last_log file";
+		$LAST_ERROR="read_global_last_log(): Could not read short_log file";
 		return NULL;
 	}
 
+	$count=0;
 	foreach( $s as $line )
 	{
 		sscanf($line,"[%[^]]] [%[^]]] %d %[^\n]",$date,$serverid,$ok,$message);
 		$serverid=get_alphanumeric_string($serverid);
 
-		$ret[$serverid]['id']=$serverid;
-		$ret[$serverid]['date']=$date;
-		$ret[$serverid]['ok']=$ok;
-		$ret[$serverid]['message']=$message;
+		if( $associative )
+			$id=$serverid;
+		else
+			$id=$count++;
+
+		$ret[$id]['date']=$date;
+		$ret[$id]['id']=$serverid;
+		$ret[$id]['ok']=$ok;
+		$ret[$id]['message']=$message;
 	}
 
 	return $ret;
 }  // }}}
+
+
+/**
+ * Prints the "servermon advertisement".
+ */
+function print_softwaredownload()
+{
+?>
+<div class="softwaredownload">
+<p>You can add this to your server! Download <a href="servermon-1.1.tar.gz">servermon-1.1.tar.gz</a>.</p>
+</div>
+<?php	
+}
 
 
 ?>

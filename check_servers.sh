@@ -7,6 +7,7 @@ INDIVIDUAL_LOG_DIR="./log"
 
 # Files below will be created inside LOGDIR/SERVERID/
 INDIVIDUAL_LOG_FILE="full_log"
+INDIVIDUAL_SHORT_LOG_FILE="short_log"
 LAST_INDIVIDUAL_LOG_FILE="last_log"
 LAST_SUCCESS_DATE_FILE="last_success"
 FAIL_COUNT_FILE="fail_count"
@@ -22,7 +23,7 @@ ping_cmd() {
 }
 
 http_cmd() {
-	wget -S --spider "$@" 2>&1
+	wget -t 1 -T 15 -S --spider "$@" 2>&1
 }
 date_cmd() {
 	date '+%F %H:%M:%S'
@@ -42,7 +43,7 @@ NORMAL=$'\e[0m'
 check_http() {
 	OUTPUT=$(http_cmd "$ADDRESS")
 	OK=$?
-	SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | tail -n 1 | sed -n 's/^ *[0-9]\+:[0-9]\+:[0-9]\+ *//;p')
+	SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | fgrep -v 'Giving up' | tail -n 1 | sed -n 's/^ *[0-9]\+:[0-9]\+:[0-9]\+ *//;p')
 	SINGLE_LINE_OUTPUT="wget: $SINGLE_LINE_OUTPUT"
 #	echo "$TMP" | fgrep "connected" &>/dev/null
 #	OK=$?
@@ -56,7 +57,7 @@ check_http() {
 check_ping() {
 	OUTPUT=$(ping_cmd "$ADDRESS")
 	OK=$?
-	SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | tail -n 2 | head -n 1 | sed 's/, *time *[0-9]\+ms *//;s/packets\? //')
+	SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | fgrep 'packets transmitted' | sed 's/, *time *[0-9]\+ms *//;s/packets\? //g')
 	SINGLE_LINE_OUTPUT="ping: $SINGLE_LINE_OUTPUT"
 }
 
@@ -112,11 +113,12 @@ cat "$SERVER_LIST_FILE" | while read line; do
 			mkdir -p `dirname "$LAST_LOG_FILE"`
 			mkdir -p "$INDIVIDUAL_LOG_DIR/$ID"
 
-			# Writing the global log
+			# Writing the short message to global log (and individual short log)
 			echo "[${DATE}] [${ID}] ${OK} ${SINGLE_LINE_OUTPUT}" >> "$GLOBAL_LOG_FILE"
 			echo "[${DATE}] [${ID}] ${OK} ${SINGLE_LINE_OUTPUT}" >> "$LAST_GLOBAL_LOG_FILE"
+			echo "[${DATE}] [${ID}] ${OK} ${SINGLE_LINE_OUTPUT}" >> "$INDIVIDUAL_LOG_DIR/$ID/$INDIVIDUAL_SHORT_LOG_FILE"
 
-			# Writing the individual log
+			# Writing the individual (long) log
 			echo "-- TEST RUN AT ${DATE} --${NEWLINE}-- Status: ${OK} --${NEWLINE}${OUTPUT}" >> "$INDIVIDUAL_LOG_DIR/$ID/$INDIVIDUAL_LOG_FILE"
 			echo "-- TEST RUN AT ${DATE} --${NEWLINE}-- Status: ${OK} --${NEWLINE}${OUTPUT}" > "$INDIVIDUAL_LOG_DIR/$ID/$LAST_INDIVIDUAL_LOG_FILE"
 

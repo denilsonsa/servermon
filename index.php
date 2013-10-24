@@ -43,7 +43,7 @@ $serverlist=read_server_list();
 $ERROR1=$LAST_ERROR;
 
 $LAST_ERROR='';
-$lastlog=read_global_last_log();
+$lastlog=read_short_log(LAST_GLOBAL_LOG_FILE);
 $ERROR2=$LAST_ERROR;
 
 if( $serverlist && $lastlog ) {
@@ -64,7 +64,7 @@ if( $serverlist && $lastlog ) {
 <!--th class="id">ID</th-->
 <th class="name">Name</th>
 <th class="updown" title="Up/Down (fail count)">U/D</th>
-<th class="last_success" title="Last time the host was up">Last time</th>
+<th class="last_success" title="Last time the host was up">Last success</th>
 <th class="message">Last message</th>
 </tr>
 </thead>
@@ -74,7 +74,7 @@ if( $serverlist && $lastlog ) {
 	foreach( $servers as $s ) {
 		echo '<tr class="'. ($even_odd?'evenline':'oddline') .' '. ($s['ok']==0?'success':'fail') . ' '.$s['type'] . ($s['important']?' important':'') .'">';
 //		echo '<td class="id">'.$s['id'].'</td>';
-		echo '<td class="name">'.$s['name'].'</td>';
+		echo '<td class="name"><a href="short_log.php?id='.$s['id'].'">'.$s['name'].'</a></td>';
 		echo '<td class="updown">'.($s['ok']==0?'up':'down ('.$s['fail_count'].')').'</td>';
 		echo '<td class="last_success">'.$s['last_success'].'</td>';
 		echo '<td class="message"><a href="'. (INDIVIDUAL_LOG_DIR."/".$s['id']."/".LAST_INDIVIDUAL_LOG_FILE) .'">'. $s['message'] .'</a></td>';
@@ -102,7 +102,5 @@ if( $serverlist && $lastlog ) {
 
 ?>
 
-<div class="softwaredownload">
-<p>You can add this to your server! Download <a href="servermon-1.0.tar.gz">servermon-1.0.tar.gz</a>.</p>
-</div>
+<?php print_softwaredownload(); ?>
 </body></html>

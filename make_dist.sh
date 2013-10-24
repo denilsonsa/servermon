@@ -1,13 +1,13 @@
 #!/bin/sh
 
-PKGNAME="servermon-1.0"
-
+PKGNAME="servermon-1.1"
 
 FILES="
 TODO.txt
 INSTALL
 check_servers.sh
 index.php
+short_log.php
 make_dist.sh
 parse_files.inc.php
 server_list-sample.txt
