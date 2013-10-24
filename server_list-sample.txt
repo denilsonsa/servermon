@@ -1,0 +1,8 @@
+# Tab-separated columns
+# Comments are blank lines, or lines starting with "#"
+# Columns are: id, name, important, type, server address, description
+
+example	example.com	0	http	http://www.example.com/	Sample host being probed using http
+google	Google	1	ping	www.google.com	Google being probed using ping
+
+# vi:ts=12

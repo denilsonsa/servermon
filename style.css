@@ -1,0 +1,118 @@
+@charset "ISO-8859-1";
+
+html, body {
+	margin: 0;
+	padding: 0;
+	background: white;
+	color: black;
+}
+body {
+	padding: 0.5em;
+}
+
+a img {
+	border: 0;
+}
+
+.error {
+	padding: 1em;
+	border: 1px solid #FF0000;
+	background: #FFCFCF;
+	color: black;
+}
+
+.pagetimes {
+/*	padding: 1em;
+	border: 1px solid black;
+	background: #EFEFEF;
+	color: black;*/
+}
+
+pre, p {
+	margin: 0;
+	padding: 0;
+	text-indent: 0;
+}
+
+
+table {
+	border-collapse: collapse;
+	border: 3px solid black;
+	margin: 1em auto;
+}
+table th {
+	font: inherit;
+	font-weight: bold;
+	text-align: center;
+	background: black;
+	color: white;
+	white-space: nowrap;
+}
+table th, table td {
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	vertical-align: middle;
+	padding: 0.2em;
+}
+
+table tr.evenline {
+	background: #FFFFFF;
+	color: black;
+}
+table tr.oddline {
+	background: #DFDFDF;
+	color: black;
+}
+
+table.status :link, table.status :visited {
+	font: inherit;
+	color: inherit;
+	text-decoration: inherit;
+}
+table.status :link:hover, table.status :visited:hover {
+	color: blue;
+}
+
+table th.updown, table td.updown {
+	text-align: center;
+	white-space: nowrap;
+}
+table th.last_success, table td.last_success {
+	white-space: nowrap;
+}
+
+table tr.fail {
+	font-weight: bold;
+}
+
+table tr.important.evenline.success {
+	background: #CFFFCF;
+	color: black;
+}
+table tr.important.oddline.success {
+	background: #AFEFAF;
+	color: black;
+}
+
+table tr.important.evenline.fail {
+	background: #FFCFCF;
+	color: black;
+}
+table tr.important.oddline.fail {
+	background: #FFAFAF;
+	color: black;
+}
+
+
+@media print {
+html,body {
+	background: white !important;
+	color: black !important;
+}
+/*
+* {
+	background: white !important;
+	color: black !important;
+}
+*/
+}

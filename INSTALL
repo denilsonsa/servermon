@@ -1,0 +1,6 @@
+Quick install instructions:
+- Uncompress servermon-<version>.tar.gz to some directory.
+- To access the web interface, make sure that directory is accessible by HTTP (it should be inside one of the apache directories).
+- Create a server_list.txt (use server_list-sample.txt as example).
+- Run ./check_servers.sh to check the servers and write the logs.
+- To make it run automatically, put "cd /some/directory/ ; ./check_servers.sh" in your crontab.
