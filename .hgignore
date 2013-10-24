@@ -11,3 +11,8 @@ syntax: glob
 .swo
 # Mac OS X invisible directory created by Finder:
 .DS_Store
+
+# Log dir:
+log
+# Actual configuration file:
+server_list.txt
