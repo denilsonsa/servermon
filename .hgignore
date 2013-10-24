@@ -1,0 +1,13 @@
+syntax: glob
+# Temporary and backup files:
+\#*#
+.*~
+*~
+.#*
+*.bak
+# Vim/Gvim temporary files:
+.*.swp
+.swp
+.swo
+# Mac OS X invisible directory created by Finder:
+.DS_Store
