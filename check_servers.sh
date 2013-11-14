@@ -57,8 +57,12 @@ check_http() {
 check_ping() {
 	OUTPUT=$(ping_cmd "$ADDRESS")
 	OK=$?
-	SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | fgrep 'packets transmitted' | sed 's/, *time *[0-9]\+ms *//;s/packets\? //g')
-	SINGLE_LINE_OUTPUT="ping: $SINGLE_LINE_OUTPUT"
+	if echo "$OUTPUT" | fgrep 'packets transmitted' &>/dev/null; then
+		SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | fgrep 'packets transmitted' | sed 's/, *time *[0-9]\+ms *//;s/packets\? //g')
+		SINGLE_LINE_OUTPUT="ping: $SINGLE_LINE_OUTPUT"
+	else
+		SINGLE_LINE_OUTPUT="$OUTPUT"
+	fi
 }
 
 

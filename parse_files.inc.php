@@ -269,7 +269,7 @@ function print_softwaredownload()
 {
 ?>
 <div class="softwaredownload">
-<p>You can add this to your server! Download <a href="servermon-1.1.tar.gz">servermon-1.1.tar.gz</a>.</p>
+<p>You can add this to your server! Download <a href="servermon-1.2.tar.gz">servermon-1.2.tar.gz</a>.</p>
 </div>
 <?php	
 }

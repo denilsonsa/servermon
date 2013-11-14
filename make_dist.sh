@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PKGNAME="servermon-1.1"
+PKGNAME="servermon-1.2"
 
 FILES="
 TODO.txt
