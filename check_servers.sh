@@ -49,15 +49,9 @@ NORMAL=$'\e[0m'
 check_http() {
 	OUTPUT=$(http_cmd "$ADDRESS")
 	OK=$?
-	SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | fgrep -v 'Giving up' | tail -n 1 | sed -n 's/^ *[0-9]\+:[0-9]\+:[0-9]\+ *//;p')
+#	SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | fgrep -v 'Giving up' | tail -n 1 | sed -n 's/^ *[0-9]\+:[0-9]\+:[0-9]\+ *//;p')
+	SINGLE_LINE_OUTPUT=$(echo "$OUTPUT" | sed -n 's: *\(HTTP\/1.[0-9].*\):\1:p ; /^Resolving /p ; /^Connecting to /p' | tail -n 1)
 	SINGLE_LINE_OUTPUT="wget: $SINGLE_LINE_OUTPUT"
-#	echo "$TMP" | fgrep "connected" &>/dev/null
-#	OK=$?
-#	if [[ $OK == 0 ]]; then
-#		if echo "$TMP" | fgrep "ERROR" &>/dev/null ; then
-#			OK=1
-#		fi
-#	fi
 }
 
 check_ping() {
@@ -233,5 +227,5 @@ rm -f "$TEST_RUNNING_FILE"
 } # main()
 
 
-export LANG=C
+export LC_ALL=C
 main

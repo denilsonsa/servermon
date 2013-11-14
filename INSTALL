@@ -1,3 +1,7 @@
+Requirements:
+- For shell-script backend: bash, wget, ping
+- For web frontend: PHP (4 or newer), apache (maybe other web servers too, I only use apache)
+
 Quick install instructions:
 - Uncompress servermon-<version>.tar.gz to some directory.
 - To access the web interface, make sure that directory is accessible by HTTP (it should be inside one of the apache directories).

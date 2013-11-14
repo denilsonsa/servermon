@@ -1,0 +1,26 @@
+2008-10-20	Denilson Figueiredo de Sá <denilsonsa@gmail.com>
+
+	* === Released 1.4 ===
+	* ChangeLog: Manually wrote this file. Don't ask me about what has changed
+	in older versions, I don't remember. ;)
+	* check_servers.sh(check_http): Updated the wget SINGLE_LINE_OUTPUT
+	filter. The old filter was somewhat broken in new wget versions.
+	* check_servers.sh: Using LC_ALL=C inside this script. No, I don't plan to
+	add support to multiple languages.
+
+2006-09-10	Denilson Figueiredo de Sá <denilsonsa@gmail.com>
+
+	* === Released 1.3 ===
+
+2006-08-14	Denilson Figueiredo de Sá <denilsonsa@gmail.com>
+
+	* === Released 1.2 ===
+
+2006-06-21	Denilson Figueiredo de Sá <denilsonsa@gmail.com>
+
+	* === Released 1.1 ===
+
+2006-06-04	Denilson Figueiredo de Sá <denilsonsa@gmail.com>
+
+	* === Released 1.0 ===
+

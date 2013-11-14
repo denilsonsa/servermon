@@ -1,17 +1,18 @@
 #!/bin/sh
 
-PKGNAME="servermon-1.3"
+PKGNAME="servermon-1.4"
 
 FILES="
-TODO.txt
+ChangeLog
 INSTALL
+TODO.txt
 check_servers.sh
 index.php
-short_log.php
 make_dist.sh
 multi_log.php
 parse_files.inc.php
 server_list-sample.conf
+short_log.php
 style.css"
 
 
