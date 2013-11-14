@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PKGNAME="servermon-1.2"
+PKGNAME="servermon-1.3"
 
 FILES="
 TODO.txt
@@ -9,8 +9,9 @@ check_servers.sh
 index.php
 short_log.php
 make_dist.sh
+multi_log.php
 parse_files.inc.php
-server_list-sample.txt
+server_list-sample.conf
 style.css"
 
 

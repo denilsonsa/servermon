@@ -1,6 +1,15 @@
 Quick install instructions:
 - Uncompress servermon-<version>.tar.gz to some directory.
 - To access the web interface, make sure that directory is accessible by HTTP (it should be inside one of the apache directories).
-- Create a server_list.txt (use server_list-sample.txt as example).
+- Create a server_list.conf (use server_list-sample.conf as example).
 - Run ./check_servers.sh to check the servers and write the logs.
 - To make it run automatically, put "cd /some/directory/ ; ./check_servers.sh" in your crontab.
+
+Configuring built-in logrotate (RECOMMENDED):
+- Edit LOGROTATE_MAX_COUNT, and put there how many "checks" must be done before rotating logs.
+  Example: if you run this script every half hour, putting 48 on above variable will rotate logs every day.
+- Edit LOGROTATE_KEEP_HOW_MANY, and put there how many old logs must be kept.
+- Note: if you decrease the LOGROTATE_KEEP_HOW_MANY value, logfiles with number greater than the new value won't be deleted. You must delete them manually.
+
+Known bug (that won't be fixed):
+When comparing multiple servers, no "date-matching" is done. The PHP script just displays each log message side-by-side, sequentially. If one of the servers has "holes" in its log (maybe because its line was commented at conf file for some time), then the status from a wrong date will be displayed.

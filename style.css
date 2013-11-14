@@ -46,10 +46,22 @@ pre, p {
 	font-weight: bold;
 }
 
+form {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+div.buttonrow {
+	text-align: center;
+}
+
+div.status {
+	margin: 1em auto;
+}
 table {
 	border-collapse: collapse;
 	border: 3px solid black;
-	margin: 1em auto;
+	margin: 3px auto;
 }
 table th {
 	font: inherit;
@@ -66,15 +78,6 @@ table th, table td {
 	padding: 0.2em;
 }
 
-table tr.evenline {
-	background: #FFFFFF;
-	color: black;
-}
-table tr.oddline {
-	background: #DFDFDF;
-	color: black;
-}
-
 table.status :link, table.status :visited {
 	font: inherit;
 	color: inherit;
@@ -82,9 +85,10 @@ table.status :link, table.status :visited {
 }
 table.status :link:hover, table.status :visited:hover {
 	color: blue;
+	text-decoration: underline;
 }
 
-table th.updown, table td.updown {
+table th.checkbox, table th.updown, table td.updown {
 	text-align: center;
 	white-space: nowrap;
 }
@@ -96,23 +100,25 @@ table tr.fail {
 	font-weight: bold;
 }
 
-table tr.important.evenline.success {
-	background: #CFFFCF;
-	color: black;
-}
-table tr.important.oddline.success {
-	background: #AFEFAF;
-	color: black;
-}
 
-table tr.important.evenline.fail {
-	background: #FFCFCF;
-	color: black;
-}
-table tr.important.oddline.fail {
-	background: #FFAFAF;
-	color: black;
-}
+table tr.evenline { background: #FFFFFF; color: black; }
+table tr.oddline  { background: #DFDFDF; color: black; }
+
+/* Non-important servers */
+
+table tr.evenline.success, table tr.evenline .success { background: #FFFFFF; color: black; }
+table tr.oddline.success , table tr.oddline  .success { background: #E8E8E8; color: black; }
+
+table tr.evenline.fail   , table tr.evenline .fail    { background: #CFCFCF; color: black; }
+table tr.oddline.fail    , table tr.oddline  .fail    { background: #AFAFAF; color: black; }
+
+/* Important servers */
+
+table tr.evenline.important.success, table tr.evenline .important.success { background: #CFFFCF; color: black; }
+table tr.oddline.important.success , table tr.oddline  .important.success { background: #AFEFAF; color: black; }
+
+table tr.evenline.important.fail   , table tr.evenline .important.fail    { background: #FFCFCF; color: black; }
+table tr.oddline.important.fail    , table tr.oddline  .important.fail    { background: #FFAFAF; color: black; }
 
 
 @media print {
@@ -120,6 +126,7 @@ html,body {
 	background: white !important;
 	color: black !important;
 }
+div.buttonrow, td.checkbox, th.checkbox, .softwaredownload { display: none; }
 /*
 * {
 	background: white !important;

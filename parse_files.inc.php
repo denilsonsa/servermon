@@ -9,8 +9,9 @@
 /**
  * to be written...
  */
-define("SERVER_LIST_FILE","server_list.txt");
+define("SERVER_LIST_FILE","server_list.conf");
 define("INDIVIDUAL_LOG_DIR","./log");
+define("SECONDS_BETWEEN_TESTS",30*60);  // 30 minutes
 
 // Files below will be created inside LOGDIR/SERVERID/
 define("INDIVIDUAL_LOG_FILE","full_log");
@@ -20,9 +21,26 @@ define("LAST_SUCCESS_DATE_FILE","last_success");
 define("FAIL_COUNT_FILE","fail_count");
 
 // Files below are "global"
-define("GLOBAL_LOG_FILE",INDIVIDUAL_LOG_DIR."/global_log");
+define("GLOBAL_LOG_FILE"     ,INDIVIDUAL_LOG_DIR."/global_log");
 define("LAST_GLOBAL_LOG_FILE",INDIVIDUAL_LOG_DIR."/last_log");
-define("LAST_TEST_DATE_FILE",INDIVIDUAL_LOG_DIR."/last_test");
+define("LAST_TEST_DATE_FILE" ,INDIVIDUAL_LOG_DIR."/last_test");
+define("TEST_RUNNING_FILE"   ,INDIVIDUAL_LOG_DIR."/running");
+
+// logrotate-related (this is a quick hack that works well)
+define("LOGROTATE_SUFFIXES",",.1");  //Add more suffixes to show more old logs
+
+
+/*
+ * Enable transparent compression of pages.
+ *
+ * Set this "On" to enable transparent compression of pages. This should reduce
+ * the amount of data transfered.
+ *
+ * Set this "Off" to disable this.
+ *
+ * Notice: this SHOULD work, but doesn't... So, I've set that option at php.ini.
+ */
+//ini_set("zlib.output_compression","On");
 
 
 /**
@@ -262,6 +280,7 @@ function read_short_log($filename,$associative=true)  // {{{
 }  // }}}
 
 
+
 /**
  * Prints the "servermon advertisement".
  */
@@ -269,7 +288,7 @@ function print_softwaredownload()
 {
 ?>
 <div class="softwaredownload">
-<p>You can add this to your server! Download <a href="servermon-1.2.tar.gz">servermon-1.2.tar.gz</a>.</p>
+<p>You can add this to your server! Download <a href="servermon-1.3.tar.gz">servermon-1.3.tar.gz</a>.</p>
 </div>
 <?php	
 }

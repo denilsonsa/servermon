@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-SERVER_LIST_FILE="server_list.txt"
+SERVER_LIST_FILE="server_list.conf"
 
 INDIVIDUAL_LOG_DIR="./log"
 
@@ -16,6 +16,12 @@ FAIL_COUNT_FILE="fail_count"
 GLOBAL_LOG_FILE="$INDIVIDUAL_LOG_DIR/global_log"
 LAST_GLOBAL_LOG_FILE="$INDIVIDUAL_LOG_DIR/last_log"
 LAST_TEST_DATE_FILE="$INDIVIDUAL_LOG_DIR/last_test"
+TEST_RUNNING_FILE="$INDIVIDUAL_LOG_DIR/running"
+
+# logrotate-related
+LOGROTATE_COUNT_FILE="$INDIVIDUAL_LOG_DIR/logrotate_count"
+LOGROTATE_MAX_COUNT=240    # 5 days, running every half hour
+LOGROTATE_KEEP_HOW_MANY=5
 
 
 ping_cmd() {
@@ -73,10 +79,89 @@ incorrect_type() {
 
 
 ################################################################################
+# logrotate
+
+
+# Returns 0 if logrotate needs to be done, else returns 1
+# Updates the logrotate count.
+need_logrotate()
+{
+	local COUNT RET
+
+	if [[ -r $LOGROTATE_COUNT_FILE ]]; then
+		COUNT=`cat "$LOGROTATE_COUNT_FILE"`
+	else
+		COUNT=0
+	fi
+
+	let COUNT++
+
+	if (( COUNT > LOGROTATE_MAX_COUNT )); then
+		COUNT=0
+		RET=0
+	else
+		RET=1
+	fi
+
+	echo "$COUNT" > "$LOGROTATE_COUNT_FILE"
+
+	return $RET
+
+	# This line is interesting enough to let me delete it. :)
+	#echo '2006-05-04 03:02:01' | awk '{ gsub(/[-:]/," "); now=systime(); last=mktime($0); if( last+7*24*60*60 < now ) exit 0; else exit 1; }'
+}
+
+
+# Receives the file to be rotated as parameter
+rotate_file()
+{
+	local FILE="$1"
+	local COUNT="$LOGROTATE_KEEP_HOW_MANY"
+
+	if [[ -z $FILE || $COUNT == 0 ]]; then
+		return
+	fi
+
+	rm -f "${FILE}.${COUNT}"
+	let COUNT--
+	while (( COUNT > 0 )); do
+		[[ -f "${FILE}.${COUNT}" ]] && mv -f "${FILE}.${COUNT}" "${FILE}.$((COUNT+1))"
+		let COUNT--
+	done
+	mv -f "${FILE}" "${FILE}.1"
+	touch "${FILE}"
+}
+
+
+# Call rotate_file() on each needed file
+rotate_all()
+{
+	local line ID
+
+	rotate_file "$GLOBAL_LOG_FILE"
+
+	cat "$SERVER_LIST_FILE" | while read line; do
+		# Skip comments and blank lines
+		if [[ $line == '#'* || $line == '' ]]; then continue; fi
+
+		ID=`echo "$line" | sed -n 's/\t.*//p'`
+		if [[ -z $ID ]]; then continue; fi
+
+		rotate_file "$INDIVIDUAL_LOG_DIR/$ID/$INDIVIDUAL_LOG_FILE"
+		rotate_file "$INDIVIDUAL_LOG_DIR/$ID/$INDIVIDUAL_SHORT_LOG_FILE"
+	done
+}
+
+
+################################################################################
 # Main
 
 
 main() {
+
+touch "$TEST_RUNNING_FILE"
+
+need_logrotate && rotate_all
 
 DATE=$(date_cmd)
 mkdir -p `dirname "$LAST_TEST_DATE_FILE"`
@@ -142,6 +227,8 @@ cat "$SERVER_LIST_FILE" | while read line; do
 		fi
 	)
 done
+
+rm -f "$TEST_RUNNING_FILE"
 
 } # main()
 

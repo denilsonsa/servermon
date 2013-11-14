@@ -9,10 +9,10 @@ if( $datestring ) {
 	$datestamp=convert_date_to_timestamp($datestring);
 	$date_modified_nice=format_date($datestamp);
 	$date_modified_http=get_http_date($datestamp);
-	$date_expires_http=get_http_date($datestamp+60*30); //30 minutes
+	$date_expires_http=get_http_date($datestamp+SECONDS_BETWEEN_TESTS);
 
 	header('Last-Modified: '.$date_modified_http);
-	header('Cache-Control: max-age='.(60*30)); //30 minutes
+	header('Cache-Control: max-age='.(SECONDS_BETWEEN_TESTS));
 	header('Expires: '.$date_expires_http);
 } else {
 	$datestamp=0;
@@ -25,8 +25,9 @@ $current_time=format_date();
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en"><head><title>Last test summary</title>
+<html lang="en"><head><title>Server Monitor</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="robots" content="noindex,nofollow">
 <?php
 if( $date_expires_http ) echo '<meta http-equiv="Expires" content="'.$date_expires_http.'">'.NEWLINE;
 ?>
@@ -34,7 +35,10 @@ if( $date_expires_http ) echo '<meta http-equiv="Expires" content="'.$date_expir
 </head><body>
 <div class="pagetimes">
 <p class="generatedtime">Page generated at <span class="time"><?=$current_time?></span></p>
-<p class="testtime">Last test executed at <span class="time"><?=$date_modified_nice?></span></p>
+<?php
+if( is_file(TEST_RUNNING_FILE) ) echo '<p class="testtime">Test is running now.</p>'.NEWLINE;
+else echo '<p class="testtime">Last test executed at <span class="time">'.$date_modified_nice.'</span></p>'.NEWLINE;
+?>
 </div>
 <?php
 
@@ -58,10 +62,13 @@ if( $serverlist && $lastlog ) {
 
 	// Printing the table
 	?>
-<div class="status"><table class="status">
+<div class="status"><form action="multi_log.php" method="get">
+<div class="buttonrow"><input type="submit" value="Show log info for selected servers"> <input type="reset" value="Clear all"></div>
+<table class="status">
 <thead>
 <tr>
 <!--th class="id">ID</th-->
+<th class="checkbox"></th>
 <th class="name">Name</th>
 <th class="updown" title="Up/Down (fail count)">U/D</th>
 <th class="last_success" title="Last time the host was up">Last success</th>
@@ -74,6 +81,7 @@ if( $serverlist && $lastlog ) {
 	foreach( $servers as $s ) {
 		echo '<tr class="'. ($even_odd?'evenline':'oddline') .' '. ($s['ok']==0?'success':'fail') . ' '.$s['type'] . ($s['important']?' important':'') .'">';
 //		echo '<td class="id">'.$s['id'].'</td>';
+		echo '<td class="checkbox"><input type="checkbox" value="1" name="check_'.$s['id'].'"></td>';
 		echo '<td class="name"><a href="short_log.php?id='.$s['id'].'">'.$s['name'].'</a></td>';
 		echo '<td class="updown">'.($s['ok']==0?'up':'down ('.$s['fail_count'].')').'</td>';
 		echo '<td class="last_success">'.$s['last_success'].'</td>';
@@ -83,7 +91,9 @@ if( $serverlist && $lastlog ) {
 	}
 	?>
 </tbody>
-</table></div>
+</table>
+<div class="buttonrow"><input type="submit" value="Show log info for selected servers"> <input type="reset" value="Clear all"></div>
+</form></div>
 <?php
 
 } else {
