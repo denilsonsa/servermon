@@ -26,7 +26,7 @@ $current_time=format_date();
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en"><head><title>Server Monitor</title>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="robots" content="noindex,nofollow">
 <?php
 if( $date_expires_http ) echo '<meta http-equiv="Expires" content="'.$date_expires_http.'">'.NEWLINE;
@@ -34,7 +34,7 @@ if( $date_expires_http ) echo '<meta http-equiv="Expires" content="'.$date_expir
 <link rel="stylesheet" type="text/css" href="style.css">
 </head><body>
 <div class="pagetimes">
-<p class="generatedtime">Page generated at <span class="time"><?=$current_time?></span></p>
+<p class="generatedtime">Page generated at <span class="time"><?php echo $current_time ?></span></p>
 <?php
 if( is_file(TEST_RUNNING_FILE) ) echo '<p class="testtime">Test is running now.</p>'.NEWLINE;
 else echo '<p class="testtime">Last test executed at <span class="time">'.$date_modified_nice.'</span></p>'.NEWLINE;
@@ -102,8 +102,8 @@ if( $serverlist && $lastlog ) {
 <div class="error">
 <p>Error reading files!</p>
 <pre>
-<?=$ERROR1?>
-<?=$ERROR2?>
+<?php echo $ERROR1 ?>
+<?php echo $ERROR2 ?>
 </pre>
 </div>
 <?php

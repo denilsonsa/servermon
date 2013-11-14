@@ -29,8 +29,8 @@ $current_time=format_date();
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en"><head><title>Short log for server <?=$serverid?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<html lang="en"><head><title>Short log for server <?php echo $serverid ?></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="robots" content="noindex,nofollow">
 <?php
 if( $date_expires_http ) echo '<meta http-equiv="Expires" content="'.$date_expires_http.'">'.NEWLINE;
@@ -38,7 +38,7 @@ if( $date_expires_http ) echo '<meta http-equiv="Expires" content="'.$date_expir
 <link rel="stylesheet" type="text/css" href="style.css">
 </head><body>
 <div class="pagetimes">
-<p class="generatedtime">Page generated at <span class="time"><?=$current_time?></span></p>
+<p class="generatedtime">Page generated at <span class="time"><?php echo $current_time ?></span></p>
 <?php
 if( is_file(TEST_RUNNING_FILE) ) echo '<p class="testtime">Test is running now.</p>'.NEWLINE;
 elseif( $datestamp ) echo '<p class="testtime">Last change at <span class="time">'.$date_modified_nice.'</span></p>'.NEWLINE;
@@ -58,12 +58,12 @@ if( !$LAST_ERROR ) {
 <?php
 if( $serverinfo ) {
 	?>
-<h1><?=$serverinfo['name']?></h1>
-<h2><?=$serverinfo['description']?></h2>
+<h1><?php echo $serverinfo['name'] ?></h1>
+<h2><?php echo $serverinfo['description'] ?></h2>
 <?php
 }
 ?>
-<p>Read the <a href="<?=(INDIVIDUAL_LOG_DIR."/".$serverid."/".INDIVIDUAL_LOG_FILE)?>">full log</a> for verbose output.</p>
+<p>Read the <a href="<?php echo (INDIVIDUAL_LOG_DIR."/".$serverid."/".INDIVIDUAL_LOG_FILE) ?>">full log</a> for verbose output.</p>
 </div>
 
 <div class="status"><table class="status">
@@ -105,7 +105,7 @@ if( $serverinfo ) {
 	// BEGIN error printing code
 	?>
 <div class="error">
-<p><?=$LAST_ERROR?></p>
+<p><?php echo $LAST_ERROR ?></p>
 </div>
 <?php
 	// END error printing code

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PKGNAME="servermon-1.4"
+PKGNAME="servermon-1.5"
 
 FILES="
 ChangeLog
