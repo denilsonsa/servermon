@@ -6,11 +6,14 @@
  * @author Denilson
  */
 
-/**
- * to be written...
- */
+// Setting a default timezone.
+date_default_timezone_set("America/Sao_Paulo");
+
+// Name of the configuration file (path relative to the servermon directory)
 define("SERVER_LIST_FILE","server_list.conf");
-define("INDIVIDUAL_LOG_DIR","./log");
+// Directory to store the logs (path relative to the servermon directory), must be web-readable
+define("INDIVIDUAL_LOG_DIR","log");
+// This interval is used to send the HTTP headers, allowing client-side cache
 define("SECONDS_BETWEEN_TESTS",30*60);  // 30 minutes
 
 // Files below will be created inside LOGDIR/SERVERID/
@@ -179,6 +182,8 @@ function read_server_list($filename=SERVER_LIST_FILE)  // {{{
 	// Note: at most 4096 characters from each line are read
 	while( ($s=fgets($f,4096))!==FALSE )
 	{
+		$s=trim($s);
+
 		// Skip comments and blank lines
 		if( $s=="" || $s{0}=="#" )
 			continue;
@@ -288,7 +293,7 @@ function print_softwaredownload()
 {
 ?>
 <div class="softwaredownload">
-<p>You can add this to your server! Download <a href="servermon-1.5.tar.gz">servermon-1.5.tar.gz</a>.</p>
+<p>You can add this to your server! Get it <a href="http://github.com/denilsonsa/servermon">from GitHub</a> or <a href="http://bitbucket.org/denilsonsa/servermon">from BitBucket</a>.</p>
 </div>
 <?php	
 }

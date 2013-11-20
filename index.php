@@ -54,10 +54,12 @@ if( $serverlist && $lastlog ) {
 
 	// Joining those two arrays into only one:
 	foreach( $lastlog as $s ) {
-		$servers[$s['id']]=$s+$serverlist[$s['id']];
-		$status=read_server_status($s['id']);
-		if( $status )
-			$servers[$s['id']]+=$status;
+		if( array_key_exists($s['id'], $serverlist) ) {
+			$servers[$s['id']]=$s+$serverlist[$s['id']];
+			$status=read_server_status($s['id']);
+			if( $status )
+				$servers[$s['id']]+=$status;
+		}
 	}
 
 	// Printing the table

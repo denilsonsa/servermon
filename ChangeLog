@@ -1,3 +1,21 @@
+2013-11-20	Denilson Figueiredo de Sá <denilsonsa@gmail.com>
+
+	* === Released 1.6 ===
+	* parse_files.inc.php: Added date_default_timezone_set(). Removes a PHP
+	warning.
+	* parse_files.inc.php: Changed the download link to GitHub and BitBucket
+	repositories.
+	* parse_files.inc.php: Added trim() to the lines read from the conf file.
+	Fixes a silly error when parsing empty lines.
+	* index.php: Fixed an error when a server exists in last_log but not in
+	the conf file.
+	* server_list-sample.conf: Added column documentation at the sample conf
+	file.
+	* INSTALL: Improved the installation instructions and reformatted the text
+	to Markdown conventions.
+	* README: Added a README file.
+	* LICENSE: Chosen MIT as the license for this project.
+
 2010-12-27	Denilson Figueiredo de Sá <denilsonsa@gmail.com>
 
 	* === Released 1.5 ===
