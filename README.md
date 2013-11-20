@@ -4,6 +4,9 @@
 
 Written by [Denilson Sá](http://about.me/denilsonsa) denilsonsa@gmail.com
 
+* http://bitbucket.org/denilsonsa/servermon
+* http://github.com/denilsonsa/servermon
+
 ## Requirements
 
 - Backend: bash, wget, ping
