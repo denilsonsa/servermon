@@ -6,16 +6,16 @@ SERVER_LIST_FILE="server_list.conf"
 INDIVIDUAL_LOG_DIR="./log"
 
 # Files below will be created inside LOGDIR/SERVERID/
-INDIVIDUAL_LOG_FILE="full_log"
+INDIVIDUAL_LOG_FILE="full_log.txt"
 INDIVIDUAL_SHORT_LOG_FILE="short_log"
-LAST_INDIVIDUAL_LOG_FILE="last_log"
-LAST_SUCCESS_DATE_FILE="last_success"
+LAST_INDIVIDUAL_LOG_FILE="last_log.txt"
+LAST_SUCCESS_DATE_FILE="last_success_date"
 FAIL_COUNT_FILE="fail_count"
 
 # Files below are "global"
 GLOBAL_LOG_FILE="$INDIVIDUAL_LOG_DIR/global_log"
-LAST_GLOBAL_LOG_FILE="$INDIVIDUAL_LOG_DIR/last_log"
-LAST_TEST_DATE_FILE="$INDIVIDUAL_LOG_DIR/last_test"
+LAST_GLOBAL_LOG_FILE="$INDIVIDUAL_LOG_DIR/last_global_log"
+LAST_TEST_DATE_FILE="$INDIVIDUAL_LOG_DIR/last_test_date"
 TEST_RUNNING_FILE="$INDIVIDUAL_LOG_DIR/running"
 
 # logrotate-related

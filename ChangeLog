@@ -1,3 +1,14 @@
+2013-11-21	Denilson Figueiredo de Sá <denilsonsa@gmail.com>
+
+	* === Released 1.7 ===
+	* Note: This release has a few backward-incompatible names! Be careful
+	while updating.
+	* parse_files.inc.php, check_servers.sh: Plaintext log files that will be
+	served via Apache now have .txt suffix.
+	* parse_files.inc.php, check_servers.sh: Renamed last_log to
+	last_global_log, last_success to last_success_date, last_test to
+	last_test_date.
+
 2013-11-20	Denilson Figueiredo de Sá <denilsonsa@gmail.com>
 
 	* INSTALL: Renamed to INSTALL.md.

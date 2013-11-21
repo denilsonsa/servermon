@@ -17,16 +17,16 @@ define("INDIVIDUAL_LOG_DIR","log");
 define("SECONDS_BETWEEN_TESTS",30*60);  // 30 minutes
 
 // Files below will be created inside LOGDIR/SERVERID/
-define("INDIVIDUAL_LOG_FILE","full_log");
+define("INDIVIDUAL_LOG_FILE","full_log.txt");
 define("INDIVIDUAL_SHORT_LOG_FILE","short_log");
-define("LAST_INDIVIDUAL_LOG_FILE","last_log");
-define("LAST_SUCCESS_DATE_FILE","last_success");
+define("LAST_INDIVIDUAL_LOG_FILE","last_log.txt");
+define("LAST_SUCCESS_DATE_FILE","last_success_date");
 define("FAIL_COUNT_FILE","fail_count");
 
 // Files below are "global"
 define("GLOBAL_LOG_FILE"     ,INDIVIDUAL_LOG_DIR."/global_log");
-define("LAST_GLOBAL_LOG_FILE",INDIVIDUAL_LOG_DIR."/last_log");
-define("LAST_TEST_DATE_FILE" ,INDIVIDUAL_LOG_DIR."/last_test");
+define("LAST_GLOBAL_LOG_FILE",INDIVIDUAL_LOG_DIR."/last_global_log");
+define("LAST_TEST_DATE_FILE" ,INDIVIDUAL_LOG_DIR."/last_test_date");
 define("TEST_RUNNING_FILE"   ,INDIVIDUAL_LOG_DIR."/running");
 
 // logrotate-related (this is a quick hack that works well)
