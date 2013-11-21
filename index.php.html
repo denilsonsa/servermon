@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en"><head><title>Server Monitor</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="robots" content="noindex,nofollow">
+<!--meta name="robots" content="noindex,nofollow"-->
 <meta http-equiv="Expires" content="Mon, 23 Feb 2009 06:30:01 GMT">
 <link rel="stylesheet" type="text/css" href="style.css">
 <script type="text/javascript">
@@ -16,9 +16,7 @@ function fakesubmission(form) {
 			}
 		}
 	}
-	if (fake_get_data) {
-		location.href = 'multi_log.php' + fake_get_data + '.html';
-	}
+	location.href = 'multi_log.php' + fake_get_data + '.html';
 	return false;
 }
 </script>
@@ -54,7 +52,7 @@ function fakesubmission(form) {
 <p>You can add this to your server! Get it <a href="http://github.com/denilsonsa/servermon">from GitHub</a> or <a href="http://bitbucket.org/denilsonsa/servermon">from BitBucket</a>.</p>
 </div>
 
-<div style="border: 2px red dashed; padding: 1px 1em;">
+<div style="border: 2px red dashed; padding: 1px 1em; margin: 1em 0;">
 
 <img src="example_network.png" align="right" alt="Network map showing spock connected to kirk, kirk connected to st.example.com; luke and vader connected to sw.example.com; st and sw connected to example.com, example.com connected to the Internet; and a Home Linux PC (running servermon) connected to the Internet.">
 
