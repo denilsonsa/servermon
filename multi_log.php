@@ -46,6 +46,7 @@ else echo '<p class="testtime">Last test executed at <span class="time">'.$date_
 if( !$LAST_ERROR ) {
 
 	$serverlist=read_server_list();
+	$servers=array();
 	foreach( $serverlist as $s ) {
 		if( isset($_REQUEST['check_'.$s['id']]) )
 		{
@@ -73,6 +74,7 @@ if( !$LAST_ERROR ) {
 <div class="serverinfo">
 <h1>Multiple server log</h1>
 <h2><?php
+	$names=array();
 	foreach( $servers as $s )
 		$names[]=$s['name'];
 	echo implode(", ",$names);
