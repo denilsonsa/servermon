@@ -8,6 +8,8 @@
 	* parse_files.inc.php, check_servers.sh: Renamed last_log to
 	last_global_log, last_success to last_success_date, last_test to
 	last_test_date.
+	* server_list-sample.conf: Improved documentation, specifying the valid
+	chars for the id column.
 
 2013-11-20	Denilson Figueiredo de Sá <denilsonsa@gmail.com>
 
