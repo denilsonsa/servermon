@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en"><head><title>Server Monitor</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Expires" content="Mon, 23 Feb 2009 06:30:01 GMT">
+<link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript">
+// Intercepts the form submission and redirects to a static page.
+function fakesubmission(form) {
+	var fake_get_data = '';
+	for (var i = 0; i < form.elements.length; i++) {
+		var elem = form.elements[i];
+		if (elem.type.toLowerCase() == 'checkbox') {
+			if (elem.checked) {
+				fake_get_data += '_' + elem.name + '=1';
+			}
+		}
+	}
+	if (fake_get_data) {
+		location.href = 'multi_log.php' + fake_get_data + '.html';
+	}
+	return false;
+}
+</script>
+</head><body>
+<div class="pagetimes">
+<p class="generatedtime">Page generated at <span class="time">2013-11-21 00:12:48</span></p>
+<p class="testtime">Last test executed at <span class="time">2009-02-23 03:00:01</span></p>
+</div>
+<div class="status"><form action="multi_log.php.html" method="get" onsubmit="return fakesubmission(this);">
+<div class="buttonrow"><input type="submit" value="Show log info for selected servers"> <input type="reset" value="Clear all"></div>
+<table class="status">
+<thead>
+<tr>
+<!--th class="id">ID</th-->
+<th class="checkbox"></th>
+<th class="name">Name</th>
+<th class="updown" title="Up/Down (fail count)">U/D</th>
+<th class="last_success" title="Last time the host was up">Last success</th>
+<th class="message">Last message</th>
+</tr>
+</thead>
+<tbody>
+<tr class="evenline success http important"><td class="checkbox"><input type="checkbox" value="1" name="check_kirk"></td><td class="name"><a href="short_log.php_id=kirk.html">kirk.st</a></td><td class="updown">up</td><td class="last_success">2009-02-23 03:00:02</td><td class="message"><a href="log/kirk/last_log.txt">wget: HTTP/1.1 200 OK</a></td></tr>
+<tr class="oddline fail http important"><td class="checkbox"><input type="checkbox" value="1" name="check_spock"></td><td class="name"><a href="short_log.php_id=spock.html">spock.st</a></td><td class="updown">down (2726)</td><td class="last_success">2008-12-27 23:00:15</td><td class="message"><a href="log/spock/last_log.txt">wget: HTTP/1.1 404 Not Found</a></td></tr>
+<tr class="evenline success ping"><td class="checkbox"><input type="checkbox" value="1" name="check_luke"></td><td class="name"><a href="short_log.php_id=luke.html">luke.sw</a></td><td class="updown">up</td><td class="last_success">2009-02-23 03:00:03</td><td class="message"><a href="log/luke/last_log.txt">ping: 5 transmitted, 5 received, 0% loss</a></td></tr>
+<tr class="oddline fail http"><td class="checkbox"><input type="checkbox" value="1" name="check_vader"></td><td class="name"><a href="short_log.php_id=vader.html">vader.sw</a></td><td class="updown">down (80)</td><td class="last_success">2009-02-21 01:30:06</td><td class="message"><a href="log/vader/last_log.txt">wget: Connecting to vader.sw.example.com|198.51.100.10|:80... failed: No route to host.</a></td></tr>
+</tbody>
+</table>
+<div class="buttonrow"><input type="submit" value="Show log info for selected servers"> <input type="reset" value="Clear all"></div>
+</form></div>
+
+<div class="softwaredownload">
+<p>You can add this to your server! Get it <a href="http://github.com/denilsonsa/servermon">from GitHub</a> or <a href="http://bitbucket.org/denilsonsa/servermon">from BitBucket</a>.</p>
+</div>
+
+<div style="border: 2px red dashed; padding: 1px 1em;">
+
+<img src="example_network.png" align="right" alt="Network map showing spock connected to kirk, kirk connected to st.example.com; luke and vader connected to sw.example.com; st and sw connected to example.com, example.com connected to the Internet; and a Home Linux PC (running servermon) connected to the Internet.">
+
+<p>These pages demonstrate what <strong>servermon</strong> looks like and feels like. They were generated from anonymized real-life logs. Obviously, the real-world <tt>servermon</tt> page does not contain this message.</p>
+	
+<p>There are 4 servers being monitored here:</p>
+
+<ul>
+	<li><strong>kirk</strong>, which is a worldwide visible server inside <strong>st</strong> subnetwork.</li>
+	<li><strong>spock</strong>, which is not directly accessible, but can be reached via <tt>kirk.st.example.com/spock</tt>, which is an Apache URL in <tt>kirk</tt> that uses mod_proxy to redirect to <tt>spock</tt>.</li>
+	<li><strong>luke</strong>, which is a worldwide visible server inside <strong>sw</strong> subnetwork.</li>
+	<li><strong>vader</strong>, which is a worldwide visible server inside <strong>sw</strong> subnetwork.</li>
+</ul>
+
+
+<p>In this example, the servers inside <strong>st</strong> network are marked as important and will be highlighted. The servers on <strong>sw</strong> network are from a neighbor lab, and are not important. Since both <strong>st</strong> and <strong>sw</strong> share the same <tt>example.com</tt> network link, monitoring all those servers at once are a good indicator of failure outside the <strong>st</strong> network.</p>
+
+<p>You can also download the sample <a href="server_list.conf">server_list.conf</a> used in this setup.</p>
+
+<p style="clear: both;"></p>
+
+</div>
+
+</body></html>

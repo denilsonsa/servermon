@@ -1,0 +1,20 @@
+-- TEST RUN AT 2009-02-23 03:00:02 --
+-- Status: 0 --
+Spider mode enabled. Check if remote file exists.
+--2009-02-23 03:00:02--  http://kirk.st.example.com/
+Resolving kirk.st.example.com... 192.0.2.4
+Connecting to kirk.st.example.com|192.0.2.4|:80... connected.
+HTTP request sent, awaiting response... 
+  HTTP/1.1 200 OK
+  Date: Mon, 23 Feb 2009 05:55:50 GMT
+  Server: Apache/2.2.9 (Debian) PHP/5.2.6-0.1~lenny1 with Suhosin-Patch mod_ssl/2.2.9 OpenSSL/0.9.8g mod_perl/2.0.4 Perl/v5.10.0
+  Last-Modified: Wed, 12 Sep 2001 21:20:17 GMT
+  ETag: "77ca07-365-38dcb637ac640"
+  Accept-Ranges: bytes
+  Content-Length: 869
+  Keep-Alive: timeout=15, max=100
+  Connection: Keep-Alive
+  Content-Type: text/html
+Length: 869 [text/html]
+Remote file exists and could contain further links,
+but recursion is disabled -- not retrieving.

@@ -1,0 +1,6 @@
+-- TEST RUN AT 2009-02-23 03:00:07 --
+-- Status: 1 --
+Spider mode enabled. Check if remote file exists.
+--2009-02-23 03:00:07--  http://vader.sw.example.com/
+Resolving vader.sw.example.com... 198.51.100.10
+Connecting to vader.sw.example.com|198.51.100.10|:80... failed: No route to host.

@@ -1,0 +1,14 @@
+-- TEST RUN AT 2009-02-23 03:00:02 --
+-- Status: 1 --
+Spider mode enabled. Check if remote file exists.
+--2009-02-23 03:00:02--  http://kirk.st.example.com/spock/
+Resolving kirk.st.example.com... 192.0.2.4
+Connecting to kirk.st.example.com|192.0.2.4|:80... connected.
+HTTP request sent, awaiting response... 
+  HTTP/1.1 404 Not Found
+  Date: Mon, 23 Feb 2009 05:55:50 GMT
+  Server: Apache/2.2.9 (Debian) PHP/5.2.6-0.1~lenny1 with Suhosin-Patch mod_ssl/2.2.9 OpenSSL/0.9.8g mod_perl/2.0.4 Perl/v5.10.0
+  Keep-Alive: timeout=15, max=100
+  Connection: Keep-Alive
+  Content-Type: text/html; charset=iso-8859-1
+Remote file does not exist -- broken link!!!
