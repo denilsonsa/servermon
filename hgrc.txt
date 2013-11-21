@@ -1,0 +1,18 @@
+# This file is not part of servermon.
+# This file is just a copy of my own `servermon/.hg/hgrc`
+#
+# This file defines two remote paths, one for the BitBucket mirror and another
+# for the GitHub mirror.
+#
+# It also sets a suffix for use with hg-git plugin for hg. This plugin allows
+# pushing and pulling to/from a git repository, using a local mercurial
+# repository.
+
+
+[paths]
+default = ssh://hg@bitbucket.org/denilsonsa/servermon
+github = git+ssh://git@github.com:denilsonsa/servermon.git
+
+[git]
+# https://bitbucket.org/durin42/hg-git
+branch_bookmark_suffix=_bookmark
