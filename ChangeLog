@@ -10,6 +10,8 @@
 	last_test_date.
 	* server_list-sample.conf: Improved documentation, specifying the valid
 	chars for the id column.
+	* check_servers.sh: Making sure the log dir is created before accessing
+	it. Prevents some errors on first run.
 
 2013-11-20	Denilson Figueiredo de Sá <denilsonsa@gmail.com>
 

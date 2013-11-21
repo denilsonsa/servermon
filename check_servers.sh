@@ -153,6 +153,7 @@ rotate_all()
 
 main() {
 
+mkdir -p "$INDIVIDUAL_LOG_DIR"
 touch "$TEST_RUNNING_FILE"
 
 need_logrotate && rotate_all
